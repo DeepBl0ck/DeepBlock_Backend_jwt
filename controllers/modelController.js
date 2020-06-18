@@ -101,7 +101,7 @@ module.exports = {
             );
             responseHandler.custom(res, 200, train_history_json);
           } catch {
-            responseHandler.fail(res, 403, "No results");
+            responseHandler.fail(res, 500, "No results");
           }
         }
       })
@@ -124,9 +124,9 @@ module.exports = {
     })
       .then(async function (project) {
         if (!project) {
-          responseHandler.fail(res, 403, "Wrong approach");
+          responseHandler.fail(res, 401, "Wrong approach");
         } else if (project.dataValues.Tests.length === 0) {
-          responseHandler.fail(res, 403, "No learning results");
+          responseHandler.fail(res, 500, "No learning results");
         } else {
           let result_list = [];
           project = project.dataValues;
@@ -181,9 +181,9 @@ module.exports = {
       });
 
       if (!test_result) {
-        responseHandler.fail(res, 403, "Wrong approach");
+        responseHandler.fail(res, 401, "Wrong approach");
       } else if (test_result.dataValues.Tests[0].length === 0) {
-        responseHandler.fail(res, 403, "Wrong approach");
+        responseHandler.fail(res, 401, "Wrong approach");
       } else {
         const type = req.query.type;
         const case1 = req.query.case1;
@@ -253,7 +253,7 @@ module.exports = {
       });
 
       if (!result_exist) {
-        responseHandler.fail(res, 403, "No learning results");
+        responseHandler.fail(res, 500, "No learning results");
       } else {
         let proj_path = result_exist.dataValues.projectPath;
         let proj = JSON.parse(
@@ -284,9 +284,9 @@ module.exports = {
         })
 
         if (!image) {
-          responseHandler.fail(res, 403, "Wrong approach");
+          responseHandler.fail(res, 401, "Wrong approach");
         } else if (image.dataValues.Predictions.length === 0) {
-          responseHandler.fail(res, 403, "Wrong approach");
+          responseHandler.fail(res, 401, "Wrong approach");
         } else {
           let x_list = [];
           let images_path = image.dataValues.Predictions[0].dataValues.imagePath;
@@ -331,9 +331,9 @@ module.exports = {
       });
 
       if (!project) {
-        responseHandler.fail(res, 403, "Wrong approach");
+        responseHandler.fail(res, 401, "Wrong approach");
       } else if (!class_list.length) {
-        responseHandler.fail(res, 403, "No learning data");
+        responseHandler.fail(res, 500, "No learning data");
       } else {
         let proj_path = project.dataValues.projectPath;
         let proj = JSON.parse(
@@ -345,11 +345,11 @@ module.exports = {
         let model = getModelFromJson(proj, learning_rate);
 
         if (typeof model === "string") {
-          responseHandler.fail(res, 403, model);
+          responseHandler.fail(res, 500, model);
         } else if (model.output.shape[1] !== class_list.length) {
           responseHandler.fail(
             res,
-            403,
+            500,
             `class_num and output_num missmatched <class_num : ${class_list.length}  your output_num : ${model.output.shape[1]}>`
           );
         } else {
@@ -620,7 +620,7 @@ module.exports = {
       });
 
       if (!result_exist) {
-        responseHandler.fail(res, 403, "No learning results");
+        responseHandler.fail(res, 500, "No learning results");
       } else {
         let proj_path = result_exist.dataValues.projectPath;
         let proj = JSON.parse(

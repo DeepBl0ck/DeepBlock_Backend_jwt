@@ -129,7 +129,7 @@ module.exports = {
       });
       if (!user) {
         transaction.rollback();
-        responseHandler.fail(res, 403, "Password error");
+        responseHandler.fail(res, 500, "Password error");
       } else {
         await models.User.destroy(
           {
@@ -252,7 +252,7 @@ module.exports = {
       });
       if (!user) {
         transaction.rollback();
-        responseHandler.fail(res, 403, "UserID or Email doesn't match");
+        responseHandler.fail(res, 500, "UserID or Email doesn't match");
       } else {
         const temp_pw = crypto.randomBytes(8).toString("hex");
 
@@ -446,7 +446,7 @@ module.exports = {
         } else {
           const user_password = user.dataValues.password;
           if (user_password !== password_verify) {
-            responseHandler.fail(res, 403, "Password doesn't match");
+            responseHandler.fail(res, 500, "Password doesn't match");
           } else {
             responseHandler.success(res, 200, "Identification completed");
           }
@@ -477,9 +477,9 @@ module.exports = {
       });
 
       if (after_password !== after_password_verify) {
-        responseHandler.fail(res, 403, "Entered the wrong password");
+        responseHandler.fail(res, 500, "Entered the wrong password");
       } else if (after_hash_password === user.dataValues.password) {
-        responseHandler.fail(res, 403, "Can't change same password");
+        responseHandler.fail(res, 500, "Can't change same password");
       } else {
         await models.User.update(
           {

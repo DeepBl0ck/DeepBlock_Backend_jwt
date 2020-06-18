@@ -525,7 +525,7 @@ users.post('/u/checkpasswd', authenticator, sanitizer.isPasswordVerify, userCont
  *                    message:
  *                        type: string
  *                        example: Wrong approach
- *        403:
+ *        500:
  *            description: In case of doesn't match password
  *            schema:
  *                type: object
@@ -570,7 +570,7 @@ users.put('/u/passwd', authenticator, sanitizer.isAfterPassword, sanitizer.isAft
  *                    message:
  *                        type: string
  *                        example: Password change completed
- *        403-1:
+ *        500-1:
  *            description: In case of wrong entering a password
  *            schema:
  *                type: object
@@ -581,7 +581,7 @@ users.put('/u/passwd', authenticator, sanitizer.isAfterPassword, sanitizer.isAft
  *                    message:
  *                        type: string
  *                        example: Entered the wrong password
- *        403-2:
+ *        500-2:
  *            description: In case of changing a same password
  *            schema:
  *                type: object
@@ -592,7 +592,7 @@ users.put('/u/passwd', authenticator, sanitizer.isAfterPassword, sanitizer.isAft
  *                    message:
  *                        type: string
  *                        example: Can't change same password
- *        500:
+ *        500-3:
  *            description: In case of server error
  *            schema:
  *                type: object
@@ -738,7 +738,7 @@ users.delete('/u/unregister', authenticator, sanitizer.isPassword, userControlle
  *                    message:
  *                        type: string
  *                        example: Membership withdrawal success
- *        403:
+ *        500-1:
  *            description: In case of entering a password doesn't match
  *            schema:
  *                type: object
@@ -749,7 +749,7 @@ users.delete('/u/unregister', authenticator, sanitizer.isPassword, userControlle
  *                    message:
  *                        type: string
  *                        example: Password error
- *        500:
+ *        500-2:
  *            description: In case of server error
  *            schema:
  *                type: object

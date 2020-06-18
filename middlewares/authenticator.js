@@ -27,7 +27,6 @@ const authMiddleware = (req, res, next) => {
             resolve(decoded)
           } else {
             reject();
-            // responseHandler.fail(res, 403, "Token not valid");
           }
         }
       })
