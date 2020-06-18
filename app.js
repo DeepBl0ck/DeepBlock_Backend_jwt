@@ -47,25 +47,7 @@ const swaggerSpec = swaggerJSDoc(options);
 const app = express();
 sequelize.sync();
 
-// const redis_client = redis.createClient({
-//   host: process.env.REDIS_HOST,
-//   port: parseInt(process.env.REDIS_PORT),
-// });
 
-// const sess = {
-//   key: "sid",
-//   resave: false,
-//   secret: secret_key,
-//   saveUninitialized: true,
-//   store: new redisStore({
-//     client: redis_client,
-//   }),
-//   cookie: {
-//     httpOnly: true,
-//     maxAge: 24000 * 60 * 60,
-//   },
-// };
-// app.use(session(sess));
 app.use(bodyParser.json());
 // set cors
 app.use(
