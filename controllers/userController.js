@@ -156,7 +156,6 @@ module.exports = {
 
   login(req, res) {
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    console.log(ip);
 
     models.User.findOne({
       where: {
@@ -180,6 +179,7 @@ module.exports = {
                 {
                   userid: user.dataValues.id,
                   username: user.dataValues.username,
+                  email: user.dataValues.email,
                   credential: hashed_ip
                 },
                 secret_key,
