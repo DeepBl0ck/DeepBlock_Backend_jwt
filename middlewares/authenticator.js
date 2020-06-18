@@ -39,7 +39,7 @@ const authMiddleware = (req, res, next) => {
     next()
   })
     .catch(function (err) {
-      responseHandler.fail(res, 500, "Token has expired");
+      responseHandler.fail(res, 403, "Token has expired");
     });
 }
 
