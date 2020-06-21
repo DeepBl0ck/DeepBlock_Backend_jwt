@@ -46,6 +46,8 @@ module.exports = {
                   first_image.dataValues.Images[0].dataValues.thumbnailPath
                 );
               }
+            } else {
+              thumbnail_image = await datauri("./public/White.png");
             }
 
             dataset_arr.push({
